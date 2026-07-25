@@ -3,7 +3,7 @@ import axios from 'axios';
 import type { SolicitudPendiente } from '../types/solicitudes.types';
 
 // Ajusta esto si usas variables de entorno como import.meta.env.VITE_API_URL
-const API_URL = 'http://localhost:4000/api/actividades/solicitudes';
+const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:4000/api') + '/actividades/solicitudes';
 
 // Helper para enviar el token
 const getConfig = () => {

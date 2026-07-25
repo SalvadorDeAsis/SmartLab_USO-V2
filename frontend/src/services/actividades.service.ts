@@ -4,7 +4,7 @@ import type { EventoLaboratorio } from '..//pages/admin/Calendario.tsx'; // Ajus
 // Ajusta la ruta a donde tengas tu interfaz
 
 // Reemplaza esto con la URL real de tu backend si es diferente
-const API_URL = "http://localhost:4000/api/actividades"
+const API_URL = (import.meta.env.VITE_API_URL || "http://localhost:4000/api") + "/actividades";
 
 // Helper para enviar el token
 const getAuthHeaders = () => {
