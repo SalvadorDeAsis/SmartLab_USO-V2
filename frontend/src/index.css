@@ -1,0 +1,580 @@
+/* src/index.css */
+
+:root {
+  --sans: 'Plus Jakarta Sans', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Plus Jakarta Sans', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #ebebeb;
+  /* Fondo gris súper claro */
+  color: #1f2937;
+}
+
+/* ── LAYOUT PRINCIPAL ── */
+.layout-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.page-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  /* 24px */
+}
+
+/* =======================================================
+   Siderbar (Estilo Teams / Corporativo)
+   ======================================================= */
+   /* ══════════════════════════════════════════
+   SIDEBAR — Paleta USO
+   #22806B  Verde principal
+   #FACB4B  Amarillo activo
+   #FFFFFF  Fondo
+   #AD868A  Mauve / accents suaves
+══════════════════════════════════════════ */
+
+/* ── Variables ── */
+.sb {
+  --sb-verde:        #22806B;
+  --sb-verde-dark:   #1a6356;
+  --sb-verde-light:  #eaf4f1;
+  --sb-amarillo:     #FACB4B;
+  --sb-amarillo-bg:  #fff9e6;
+  --sb-amarillo-txt: #7a5c00;
+  --sb-mauve:        #AD868A;
+  --sb-blanco:       #FFFFFF;
+  --sb-gray-100:     #f7f8fa;
+  --sb-gray-200:     #eef0f3;
+  --sb-gray-400:     #b0b8c4;
+  --sb-gray-600:     #6b7280;
+  --sb-text:         #1a2e2a;
+  --sb-width:        240px;
+  --sb-radius:       12px;
+  --sb-transition:   0.28s ease;
+}
+
+/* ── Base ── */
+.sb {
+  position: relative;
+  width: var(--sb-width);
+  min-height: 100vh;
+  background: var(--sb-blanco);
+  border-right: 1px solid var(--sb-gray-200);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: width var(--sb-transition), transform var(--sb-transition);
+  overflow: hidden;
+  box-shadow: 2px 0 16px rgba(34, 128, 107, 0.06);
+}
+
+/* ── Collapsed ── */
+.sb--collapsed {
+  width: 0;
+  border-right: none;
+}
+
+/* ══════════════════════════════════════
+   TOGGLE BUTTON
+══════════════════════════════════════ */
+.sb__toggle {
+  position: absolute;
+  top: 1.2rem;
+  right: -14px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--sb-blanco);
+  border: 1.5px solid var(--sb-gray-200);
+  color: var(--sb-verde);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background var(--sb-transition), box-shadow var(--sb-transition);
+  box-shadow: 0 2px 8px rgba(34, 128, 107, 0.12);
+}
+
+.sb__toggle:hover {
+  background: var(--sb-verde-light);
+  box-shadow: 0 2px 12px rgba(34, 128, 107, 0.22);
+}
+
+.sb--collapsed .sb__toggle {
+  transform: rotate(180deg);
+}
+
+/* ══════════════════════════════════════
+   HEADER
+══════════════════════════════════════ */
+.sb__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem 1.2rem;
+  gap: 0.75rem;
+}
+
+/* Avatar circle — verde con texto blanco */
+.sb__avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--sb-verde), var(--sb-verde-dark));
+  color: var(--sb-blanco);
+  font-size: 1.3rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.04em;
+  box-shadow:
+    0 4px 14px rgba(34, 128, 107, 0.30),
+    0 0 0 4px var(--sb-verde-light);
+  flex-shrink: 0;
+}
+
+.sb__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.sb__brand-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--sb-text);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sb__brand-sub {
+  font-size: 0.68rem;
+  color: var(--sb-mauve);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════════════
+   DIVIDER
+══════════════════════════════════════ */
+.sb__divider {
+  height: 1px;
+  margin: 0 1.25rem;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--sb-gray-200) 30%,
+    var(--sb-gray-200) 70%,
+    transparent
+  );
+}
+
+/* ══════════════════════════════════════
+   NAVIGATION
+══════════════════════════════════════ */
+.sb__nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.75rem 0;
+  scrollbar-width: none;
+}
+
+.sb__nav::-webkit-scrollbar {
+  display: none;
+}
+
+.sb__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ── Link base ── */
+.sb__item {
+  padding: 0 0.75rem;
+}
+
+.sb__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.72rem 0.85rem;
+  border-radius: var(--sb-radius);
+  text-decoration: none;
+  color: var(--sb-gray-600);
+  font-size: 0.875rem;
+  font-weight: 400;
+  transition:
+    background var(--sb-transition),
+    color var(--sb-transition),
+    transform 0.15s ease;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sb__link:hover {
+  background: var(--sb-gray-100);
+  color: var(--sb-verde);
+  transform: translateX(2px);
+}
+
+.sb__link:hover .sb__icon {
+  color: var(--sb-verde);
+}
+
+/* ── ACTIVE link — amarillo USO ── */
+.sb__link--active {
+  background: var(--sb-amarillo);
+  color: var(--sb-amarillo-txt);
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(250, 203, 75, 0.35);
+}
+
+.sb__link--active:hover {
+  background: #f7c435;
+  color: var(--sb-amarillo-txt);
+  transform: translateX(2px);
+}
+
+.sb__link--active .sb__icon {
+  color: var(--sb-amarillo-txt);
+}
+
+/* Left indicator bar (active) */
+.sb__indicator {
+  position: absolute;
+  left: -0.75rem;
+  top: 20%;
+  height: 60%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--sb-verde);
+}
+
+/* Icon */
+.sb__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--sb-gray-400);
+  transition: color var(--sb-transition);
+}
+
+/* Label */
+.sb__label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Active dot */
+.sb__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sb-verde);
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════
+   BOTTOM USER SECTION
+══════════════════════════════════════ */
+.sb__bottom {
+  padding-bottom: 0.5rem;
+}
+
+.sb__user {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1rem;
+  margin: 0.5rem 0.75rem;
+  border-radius: var(--sb-radius);
+  background: var(--sb-verde-light);
+  transition: background var(--sb-transition);
+  cursor: default;
+}
+
+.sb__user:hover {
+  background: #d8ede8;
+}
+
+/* Small avatar */
+.sb__user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--sb-verde);
+  color: var(--sb-blanco);
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+}
+
+.sb__user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.sb__user-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--sb-verde-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sb__user-role {
+  font-size: 0.67rem;
+  color: var(--sb-mauve);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Logout button */
+.sb__logout {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--sb-mauve);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--sb-transition), color var(--sb-transition);
+}
+
+.sb__logout:hover {
+  background: rgba(173, 134, 138, 0.15);
+  color: var(--sb-mauve);
+}
+/* =======================================================
+   NAVBAR (Estilo Teams / Corporativo)
+   ======================================================= */
+.navbar {
+  height: 56px; 
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Aumentamos un poco el padding horizontal para despegarlo del borde de la pantalla */
+  padding: 0 1.5rem; 
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  /* Reducimos el gap para que el icono y el título se vean como un grupo unido */
+  gap: 0.75rem; 
+  flex: 1; 
+}
+
+.icon-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #4b5563;
+  /* En lugar de padding, le damos dimensiones fijas para un hover perfecto */
+  width: 60px;
+  height: 36px;
+  border-radius: 8px; /* Bordes un poco más suaves */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, color 0.2s;
+  position: relative; 
+  /* Evitamos el contorno azul por defecto de los navegadores al hacer clic */
+  outline: none; 
+}
+
+.icon-button:hover {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.navbar-title {
+  font-size: 1.125rem; 
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  /* Un pequeño ajuste para alinear visualmente el texto con el icono */
+  line-height: 1; 
+}/* --- Buscador Central (El Protagonista) --- */
+
+.navbar-center {
+  flex: 1.5; /* Ocupa más espacio que los lados */
+  display: flex;
+  justify-content: center;
+}
+
+.search-container {
+  position: relative;
+  width: 100%;
+  max-width: 480px; /* Ancho máximo prominente */
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  color: #6b7280;
+  pointer-events: none;
+}
+
+.search-input-navbar {
+  width: 100%;
+  padding: 0.4rem 1rem 0.4rem 2.25rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 0.875rem; /* 14px */
+  background-color: #f9fafb;
+  color: #1f2937;
+  transition: all 0.2s ease;
+}
+
+.search-input-navbar:focus {
+  outline: none;
+  background-color: #ffffff;
+  border-color: #22806B; /* Tu color verde en el foco */
+  box-shadow: 0 0 0 2px rgba(34, 128, 107, 0.1);
+}
+
+/* --- Lado Derecho --- */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.25rem;
+  flex: 1;
+}
+
+.user-info-navbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.user-greeting {
+  font-size: 0.875rem; /* 14px */
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.user-avatar-navbar {
+  width: 32px;
+  height: 32px;
+  background-color: #FACB4B; /* Tu color amarillo */
+  color: #111827;
+  border-radius: 50%; /* Mantener redondo para avatares es buena UX */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+/* Detalle elegante: un punto de notificación rojo en la campana */
+.notification-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  background-color: #ef4444; /* Rojo de alerta */
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+}
+
+/* Media query para ocultar el saludo en pantallas pequeñas si es necesario */
+@media (max-width: 768px) {
+  .user-greeting {
+    display: none;
+  }
+}
+
+/* =======================================================
+   SIDEBAR RESPONSIVE (MÓVIL)
+   ======================================================= */
+
+@media (max-width: 768px) {
+
+  /* El sidebar deja de empujar el contenido */
+  .sb {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--sb-width);
+    z-index: 1000;
+
+    transform: translateX(0);
+    transition: transform .3s ease;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  }
+
+  /* Cuando está cerrado simplemente se esconde */
+  .sb--collapsed {
+    width: var(--sb-width);
+    transform: translateX(-100%);
+    border-right: 1px solid var(--sb-gray-200);
+  }
+
+  /* El contenido ya no se mueve */
+  .main-content {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .page-content {
+    width: 100%;
+    min-width: 0;
+    padding: 1rem;
+  }
+
+}
+
